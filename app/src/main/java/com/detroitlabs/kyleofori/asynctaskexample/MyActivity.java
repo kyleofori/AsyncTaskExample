@@ -16,6 +16,7 @@ public class MyActivity extends Activity implements OnClickListener {
 
     public Button btn;
     public ProgressBar elBar;
+    public TextView txt;
 
 
     @Override
@@ -40,9 +41,16 @@ public class MyActivity extends Activity implements OnClickListener {
     private class LongOperation extends AsyncTask<Integer, Integer, String> {
 
         @Override
+        protected void onPreExecute() {
+            elBar = (ProgressBar) findViewById(R.id.progressBar);
+            elBar.setProgress(0);
+            txt = (TextView) findViewById(R.id.output);
+        }
+
+        @Override
         protected String doInBackground(Integer... params) {
             for (int x : params) {
-                for (int i = 0; i < params[0]; i++) {
+                for (int i = 0; i < x; i++) {
                     try {
                         Thread.sleep(1000);
                         publishProgress(i);
@@ -56,22 +64,16 @@ public class MyActivity extends Activity implements OnClickListener {
 
         @Override
         protected void onPostExecute(String result) {
-            TextView txt = (TextView) findViewById(R.id.output);
             txt.setText(result);
             // might want to change "executed" for the returned string passed
             // into onPostExecute() but that is up to you
         }
 
         @Override
-        protected void onPreExecute() {
-            elBar = (ProgressBar) findViewById(R.id.progressBar);
-            elBar.setProgress(0);
-        }
-
-        @Override
         protected void onProgressUpdate(Integer... values) {
             try {
                 elBar.incrementProgressBy(1);
+                txt.setText("Executing a task...");
             } catch (IllegalArgumentException e) {
             }
         }
