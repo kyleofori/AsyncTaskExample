@@ -68,7 +68,6 @@ public class MyActivity extends Activity implements OnClickListener {
             try {
                 ProgressBar elBar = (ProgressBar) findViewById(R.id.progressBar);
                 elBar.setProgress(0);
-                elBar.incrementProgressBy(1);
             } catch (IllegalArgumentException e) {
             }
         }
