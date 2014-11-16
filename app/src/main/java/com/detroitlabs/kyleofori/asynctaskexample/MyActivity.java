@@ -65,6 +65,7 @@ public class MyActivity extends Activity implements OnClickListener {
         @Override
         protected void onPreExecute() {
             elBar = (ProgressBar) findViewById(R.id.progressBar);
+            elBar.setProgress(0);
         }
 
         @Override
