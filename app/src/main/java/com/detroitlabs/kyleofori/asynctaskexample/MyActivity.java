@@ -32,7 +32,7 @@ public class MyActivity extends Activity implements OnClickListener {
         // detect the view that was "clicked"
         switch (view.getId()) {
             case R.id.button1:
-                new LongOperation().execute("");
+                new LongOperation().execute(25, 50, 75, 100);
                 break;
         }
     }
