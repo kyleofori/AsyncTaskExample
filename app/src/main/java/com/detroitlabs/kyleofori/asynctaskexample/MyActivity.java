@@ -15,7 +15,7 @@ import android.view.View.OnClickListener;
 public class MyActivity extends Activity implements OnClickListener {
 
     public Button btn;
-    public ProgressBar elBar = (ProgressBar) findViewById(R.id.progressBar);
+    public ProgressBar elBar;
 
 
     @Override
@@ -63,7 +63,9 @@ public class MyActivity extends Activity implements OnClickListener {
         }
 
         @Override
-        protected void onPreExecute() {}
+        protected void onPreExecute() {
+            elBar = (ProgressBar) findViewById(R.id.progressBar);
+        }
 
         @Override
         protected void onProgressUpdate(Integer... values) {
