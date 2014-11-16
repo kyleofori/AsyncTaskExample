@@ -44,6 +44,7 @@ public class MyActivity extends Activity implements OnClickListener {
             for (int i = 0; i < 5; i++) {
                 try {
                     Thread.sleep(1000);
+                    publishProgress();
                 } catch (InterruptedException e) {
                     Thread.interrupted();
                 }
