@@ -12,16 +12,15 @@ import android.view.View.OnClickListener;
 
 public class MyActivity extends Activity implements OnClickListener {
 
-    public Button btn;
-    public ProgressBar elBar;
-    public TextView txt;
+    private ProgressBar elBar;
+    private TextView txt;
 
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_my);
-        btn = (Button) findViewById(R.id.button1);
+        Button btn = (Button) findViewById(R.id.button1);
         btn.setOnClickListener(this);
         elBar = (ProgressBar) findViewById(R.id.progressBar);
         txt = (TextView) findViewById(R.id.output);
