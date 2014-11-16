@@ -3,8 +3,6 @@ package com.detroitlabs.kyleofori.asynctaskexample;
 import android.app.Activity;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.provider.Settings.System;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ProgressBar;
@@ -24,15 +22,12 @@ public class MyActivity extends Activity implements OnClickListener {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_my);
         btn = (Button) findViewById(R.id.button1);
-        // because we implement OnClickListener we only have to pass "this"
-        // (much easier)
         btn.setOnClickListener(this);
         elBar = (ProgressBar) findViewById(R.id.progressBar);
         txt = (TextView) findViewById(R.id.output);
     }
 
     public void onClick(View view) {
-        // detect the view that was "clicked"
         switch (view.getId()) {
             case R.id.button1:
                 new LongOperation().execute(7, 6, 5);
@@ -59,14 +54,12 @@ public class MyActivity extends Activity implements OnClickListener {
                     }
                 }
             }
-            return "Executed all"; //What's returned will be the argument for onPostExecute().
+            return "Executed all";
         }
 
         @Override
         protected void onPostExecute(String result) {
             txt.setText(result);
-            // might want to change "executed" for the returned string passed
-            // into onPostExecute() but that is up to you
         }
 
         @Override
