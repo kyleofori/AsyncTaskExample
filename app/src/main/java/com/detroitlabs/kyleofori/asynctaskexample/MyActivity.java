@@ -4,13 +4,17 @@ import android.app.Activity;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.provider.Settings.System;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.view.View.OnClickListener;
 
 
 public class MyActivity extends Activity implements OnClickListener {
+
+
 
     Button btn;
 
@@ -33,10 +37,10 @@ public class MyActivity extends Activity implements OnClickListener {
         }
     }
 
-    private class LongOperation extends AsyncTask<String, Void, String> {
+    private class LongOperation extends AsyncTask<Integer, Integer, String> {
 
         @Override
-        protected String doInBackground(String... params) {
+        protected String doInBackground(Integer... params) {
             for (int i = 0; i < 5; i++) {
                 try {
                     Thread.sleep(1000);
@@ -52,13 +56,20 @@ public class MyActivity extends Activity implements OnClickListener {
             TextView txt = (TextView) findViewById(R.id.output);
             txt.setText("Executed"); // txt.setText(result);
             // might want to change "executed" for the returned string passed
-            // into onPostExecute() but that is upto you
+            // into onPostExecute() but that is up to you
         }
 
         @Override
         protected void onPreExecute() {}
 
         @Override
-        protected void onProgressUpdate(Void... values) {}
+        protected void onProgressUpdate(Integer... values) {
+            try {
+                ProgressBar elBar = (ProgressBar) findViewById(R.id.progressBar);
+                elBar.setProgress(0);
+                elBar.incrementProgressBy(1);
+            } catch (IllegalArgumentException e) {
+            }
+        }
     }
 }
