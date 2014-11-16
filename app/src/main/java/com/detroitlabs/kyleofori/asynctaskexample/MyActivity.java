@@ -35,7 +35,7 @@ public class MyActivity extends Activity implements OnClickListener {
         // detect the view that was "clicked"
         switch (view.getId()) {
             case R.id.button1:
-                new LongOperation().execute(5);
+                new LongOperation().execute(7, 6, 5);
                 break;
         }
     }
@@ -44,7 +44,7 @@ public class MyActivity extends Activity implements OnClickListener {
 
         @Override
         protected void onPreExecute() {
-            elBar.setProgress(0);
+            txt.setText("Nothing has been done yet");
         }
 
         @Override
@@ -53,7 +53,7 @@ public class MyActivity extends Activity implements OnClickListener {
                 for (int i = 0; i < x; i++) {
                     try {
                         Thread.sleep(1000);
-                        publishProgress(i);
+                        publishProgress(i+1);
                     } catch (InterruptedException e) {
                         Thread.interrupted();
                     }
@@ -72,7 +72,7 @@ public class MyActivity extends Activity implements OnClickListener {
         @Override
         protected void onProgressUpdate(Integer... values) {
             try {
-                elBar.incrementProgressBy(1);
+                elBar.setProgress(values[0]);
                 txt.setText("Executing a task...");
             } catch (IllegalArgumentException e) {
             }
