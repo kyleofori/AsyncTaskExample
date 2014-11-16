@@ -27,6 +27,8 @@ public class MyActivity extends Activity implements OnClickListener {
         // because we implement OnClickListener we only have to pass "this"
         // (much easier)
         btn.setOnClickListener(this);
+        elBar = (ProgressBar) findViewById(R.id.progressBar);
+        txt = (TextView) findViewById(R.id.output);
     }
 
     public void onClick(View view) {
@@ -42,9 +44,7 @@ public class MyActivity extends Activity implements OnClickListener {
 
         @Override
         protected void onPreExecute() {
-            elBar = (ProgressBar) findViewById(R.id.progressBar);
             elBar.setProgress(0);
-            txt = (TextView) findViewById(R.id.output);
         }
 
         @Override
