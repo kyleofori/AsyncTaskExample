@@ -14,9 +14,9 @@ import android.view.View.OnClickListener;
 
 public class MyActivity extends Activity implements OnClickListener {
 
+    public Button btn;
+    public ProgressBar elBar = (ProgressBar) findViewById(R.id.progressBar);
 
-
-    Button btn;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -68,7 +68,6 @@ public class MyActivity extends Activity implements OnClickListener {
         @Override
         protected void onProgressUpdate(Integer... values) {
             try {
-                ProgressBar elBar = (ProgressBar) findViewById(R.id.progressBar);
                 elBar.incrementProgressBy(1);
             } catch (IllegalArgumentException e) {
             }
