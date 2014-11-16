@@ -9,6 +9,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:indeterminate="false"
+    android:progress="0"
     android:max="10"
     android:padding="10dip">
 </ProgressBar>
@@ -20,6 +21,5 @@
 </Button>
 <TextView android:id="@+id/output"
           android:layout_width="match_parent"
-          android:layout_height="wrap_content"
-          android:text="Replace"/>
+          android:layout_height="wrap_content"/>
 </LinearLayout>

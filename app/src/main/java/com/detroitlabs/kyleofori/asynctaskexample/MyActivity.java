@@ -32,7 +32,7 @@ public class MyActivity extends Activity implements OnClickListener {
         // detect the view that was "clicked"
         switch (view.getId()) {
             case R.id.button1:
-                new LongOperation().execute(25, 50, 75, 100);
+                new LongOperation().execute(5);
                 break;
         }
     }
@@ -41,21 +41,23 @@ public class MyActivity extends Activity implements OnClickListener {
 
         @Override
         protected String doInBackground(Integer... params) {
-            for (int i = 0; i < 5; i++) {
-                try {
-                    Thread.sleep(1000);
-                    publishProgress();
-                } catch (InterruptedException e) {
-                    Thread.interrupted();
+            for (int x : params) {
+                for (int i = 0; i < params[0]; i++) {
+                    try {
+                        Thread.sleep(1000);
+                        publishProgress(i);
+                    } catch (InterruptedException e) {
+                        Thread.interrupted();
+                    }
                 }
             }
-            return "Executed";
+            return "Executed all"; //What's returned will be the argument for onPostExecute().
         }
 
         @Override
         protected void onPostExecute(String result) {
             TextView txt = (TextView) findViewById(R.id.output);
-            txt.setText("Executed"); // txt.setText(result);
+            txt.setText(result);
             // might want to change "executed" for the returned string passed
             // into onPostExecute() but that is up to you
         }
@@ -67,7 +69,7 @@ public class MyActivity extends Activity implements OnClickListener {
         protected void onProgressUpdate(Integer... values) {
             try {
                 ProgressBar elBar = (ProgressBar) findViewById(R.id.progressBar);
-                elBar.setProgress(0);
+                elBar.incrementProgressBy(1);
             } catch (IllegalArgumentException e) {
             }
         }
