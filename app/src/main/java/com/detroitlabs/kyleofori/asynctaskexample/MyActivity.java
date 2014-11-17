@@ -70,7 +70,7 @@ public class MyActivity extends Activity {
                     }
                     try {
                         Thread.sleep(1000);
-                        publishProgress(i+1);
+                        publishProgress(i+1, x);
                     } catch (InterruptedException e) {
                         Thread.interrupted();
                     }
@@ -87,6 +87,7 @@ public class MyActivity extends Activity {
         @Override
         protected void onProgressUpdate(Integer... values) {
             try {
+                progressBar.setMax(values[1]);
                 progressBar.setProgress(values[0]);
                 txt.setText("Executing a task...");
             } catch (IllegalArgumentException e) {
