@@ -15,8 +15,10 @@ public class MyActivity extends Activity {
     private static final String LOG_TAG = MyActivity.class.getSimpleName();
     private ProgressBar progressBar;
     private TextView txt;
+    private TextView txt_detail;
     private Button btn_polite;
     private Button btn_rude;
+    private boolean mayInterruptIfRunning;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -33,6 +35,7 @@ public class MyActivity extends Activity {
         });
         progressBar = (ProgressBar) findViewById(R.id.progressBar);
         txt = (TextView) findViewById(R.id.output);
+        txt_detail = (TextView) findViewById(R.id.output_detail);
     }
 
     private class LongOperation extends AsyncTask<Integer, Integer, String> {
@@ -40,18 +43,20 @@ public class MyActivity extends Activity {
         @Override
         protected void onPreExecute() {
             txt.setText("Nothing has been done yet");
+            txt_detail.setText("");
             progressBar.setProgress(0);
             btn_polite.setOnClickListener(new OnClickListener() {
                 @Override
                 public void onClick(View view) {
                     LongOperation.this.cancel(false);
-//                    flagCancelled = true; //goes to onPostExecute method
+                    mayInterruptIfRunning = false;
                 }
             });
             btn_rude.setOnClickListener(new OnClickListener() {
                 @Override
                 public void onClick(View view) {
                     LongOperation.this.cancel(true);
+                    mayInterruptIfRunning = true;
                 }
             });
         }
@@ -60,8 +65,8 @@ public class MyActivity extends Activity {
         protected String doInBackground(Integer... params) {
             for (int x : params) {
                 for (int i = 0; i < x; i++) {
-                    if(isCancelled()) { //Fix before presentation!
-                        return "Politely interrupted";
+                    if(isCancelled()) {
+                        return "Task interrupted";
                     }
                     try {
                         Thread.sleep(1000);
@@ -92,6 +97,11 @@ public class MyActivity extends Activity {
         @Override
         protected void onCancelled(String result) {
             txt.setText(result);
+            if(!mayInterruptIfRunning) {
+                txt_detail.setText("...politely.");
+            } else {
+                txt_detail.setText("RUDELY");
+            }
         }
 
     }
