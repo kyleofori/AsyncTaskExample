@@ -57,6 +57,9 @@ public class MyActivity extends Activity {
         @Override
         protected String doInBackground(Integer... params) {
             for (int x : params) {
+                if(isCancelled()) { //Fix before presentation!
+                    break;
+                }
                 for (int i = 0; i < x; i++) {
                     try {
                         Thread.sleep(1000);
