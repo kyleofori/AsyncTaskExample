@@ -11,7 +11,7 @@ import android.widget.TextView;
 import android.view.View.OnClickListener;
 
 
-public class MyActivity extends Activity implements OnClickListener {
+public class MyActivity extends Activity {
     private static final String LOG_TAG = MyActivity.class.getSimpleName();
     private ProgressBar progressBar;
     private TextView txt;
@@ -44,6 +44,12 @@ public class MyActivity extends Activity implements OnClickListener {
                 @Override
                 public void onClick(View view) {
                     LongOperation.this.cancel(false);
+                }
+            });
+            btn_rude.setOnClickListener(new OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    LongOperation.this.cancel(true);
                 }
             });
         }
