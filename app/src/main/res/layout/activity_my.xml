@@ -19,6 +19,18 @@
     android:layout_height="wrap_content"
     android:text="Start Progress" >
 </Button>
+<Button
+    android:id="@+id/button_polite"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:text="Polite Cancel" >
+</Button>
+<Button
+    android:id="@+id/button_rude"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:text="Rude Cancel" >
+</Button>
 <TextView android:id="@+id/output"
           android:layout_width="match_parent"
           android:layout_height="wrap_content"/>
