@@ -45,6 +45,7 @@ public class MyActivity extends Activity {
                 @Override
                 public void onClick(View view) {
                     LongOperation.this.cancel(false);
+//                    flagCancelled = true; //goes to onPostExecute method
                 }
             });
             btn_rude.setOnClickListener(new OnClickListener() {
@@ -58,10 +59,10 @@ public class MyActivity extends Activity {
         @Override
         protected String doInBackground(Integer... params) {
             for (int x : params) {
-                if(isCancelled()) { //Fix before presentation!
-                    break;
-                }
                 for (int i = 0; i < x; i++) {
+                    if(isCancelled()) { //Fix before presentation!
+                        return "Politely interrupted";
+                    }
                     try {
                         Thread.sleep(1000);
                         publishProgress(i+1);
@@ -89,8 +90,8 @@ public class MyActivity extends Activity {
         }
 
         @Override
-        protected void onCancelled() {
-            txt.setText("Task cancelled");
+        protected void onCancelled(String result) {
+            txt.setText(result);
         }
 
     }
