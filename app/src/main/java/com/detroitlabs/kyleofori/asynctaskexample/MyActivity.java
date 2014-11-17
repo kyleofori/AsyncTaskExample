@@ -25,14 +25,14 @@ public class MyActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_my);
         Button btn = (Button) findViewById(R.id.button1);
-        btn_polite = (Button) findViewById(R.id.button_polite);
-        btn_rude = (Button) findViewById(R.id.button_rude);
         btn.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View view) {
                 new LongOperation().execute(7, 6, 5);
             }
         });
+        btn_polite = (Button) findViewById(R.id.button_polite);
+        btn_rude = (Button) findViewById(R.id.button_rude);
         progressBar = (ProgressBar) findViewById(R.id.progressBar);
         txt = (TextView) findViewById(R.id.output);
         txt_detail = (TextView) findViewById(R.id.output_detail);
@@ -97,10 +97,11 @@ public class MyActivity extends Activity {
         @Override
         protected void onCancelled(String result) {
             txt.setText(result);
-            if(!mayInterruptIfRunning) {
-                txt_detail.setText("...politely.");
-            } else {
+            if(mayInterruptIfRunning) {
                 txt_detail.setText("RUDELY");
+            } else {
+                txt_detail.setText("...politely.");
+
             }
         }
 
