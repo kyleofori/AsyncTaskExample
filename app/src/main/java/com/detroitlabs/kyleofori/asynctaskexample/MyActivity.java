@@ -40,6 +40,7 @@ public class MyActivity extends Activity {
         @Override
         protected void onPreExecute() {
             txt.setText("Nothing has been done yet");
+            progressBar.setProgress(0);
             btn_polite.setOnClickListener(new OnClickListener() {
                 @Override
                 public void onClick(View view) {
