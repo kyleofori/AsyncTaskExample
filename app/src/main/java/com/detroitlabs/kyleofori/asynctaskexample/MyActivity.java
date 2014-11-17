@@ -87,6 +87,10 @@ public class MyActivity extends Activity {
             }
         }
 
+        @Override
+        protected void onCancelled() {
+            txt.setText("Task cancelled");
+        }
 
     }
 }
