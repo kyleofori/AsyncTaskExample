@@ -15,30 +15,24 @@ public class MyActivity extends Activity implements OnClickListener {
     private static final String LOG_TAG = MyActivity.class.getSimpleName();
     private ProgressBar progressBar;
     private TextView txt;
+    private Button btn_polite;
+    private Button btn_rude;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_my);
         Button btn = (Button) findViewById(R.id.button1);
-        Button btn_polite = (Button) findViewById(R.id.button_polite);
-        Button btn_rude = (Button) findViewById(R.id.button_rude);
-        btn.setOnClickListener(this);
+        btn_polite = (Button) findViewById(R.id.button_polite);
+        btn_rude = (Button) findViewById(R.id.button_rude);
+        btn.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                new LongOperation().execute(7, 6, 5);
+            }
+        });
         progressBar = (ProgressBar) findViewById(R.id.progressBar);
         txt = (TextView) findViewById(R.id.output);
-    }
-
-    public void onClick(View view) {
-        switch (view.getId()) {
-            case R.id.button1:
-                new LongOperation().execute(7, 6, 5);
-                break;
-            case R.id.button_polite:
-                LongOperation.cancel(false);
-                break;
-            case R.id.button_rude:
-                break;
-        }
     }
 
     private class LongOperation extends AsyncTask<Integer, Integer, String> {
@@ -46,6 +40,12 @@ public class MyActivity extends Activity implements OnClickListener {
         @Override
         protected void onPreExecute() {
             txt.setText("Nothing has been done yet");
+            btn_polite.setOnClickListener(new OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    LongOperation.this.cancel(false);
+                }
+            });
         }
 
         @Override
